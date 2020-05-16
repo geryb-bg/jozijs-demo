@@ -1,0 +1,29 @@
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '12.x'
+    displayName: 'Install Node.js v12'
+
+  - script: |
+      npm install
+    displayName: 'Install server dependencies'
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(System.DefaultWorkingDirectory)'
+      Contents: |
+        **/*
+        *
+        !node_modules/
+      TargetFolder: '$(Build.ArtifactStagingDirectory)/app'
+
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)/app'
+      ArtifactName: app
