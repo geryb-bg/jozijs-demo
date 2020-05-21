@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "jest --coverage=false tests/",
-    "debug": "nodemon --experimental-modules --inspect index.js",
+    "debug": "node --experimental-modules index.js",
     "start": "PORT=8080 node --experimental-modules index.js"
   },
   "author": "",
@@ -15,7 +15,6 @@
     "express": "^4.17.1"
   },
   "devDependencies": {
-    "jest": "^26.0.1",
-    "nodemon": "^2.0.4"
+    "jest": "^26.0.1"
   }
 }
