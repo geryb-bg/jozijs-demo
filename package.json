@@ -7,7 +7,7 @@
   "scripts": {
     "test": "jest --coverage=false tests/",
     "debug": "nodemon --experimental-modules --inspect index.js",
-    "start": "PORT=8080 node --experimental-modules --inspect index.js"
+    "start": "PORT=8080 node --experimental-modules index.js"
   },
   "author": "",
   "license": "ISC",

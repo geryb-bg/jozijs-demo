@@ -1,31 +1,32 @@
 trigger:
-- master
+  - master
 
 pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: "12.x"
-  displayName: "Install Node"
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '12.x'
+    displayName: 'Install Node'
 
-- script: |
-    npm install
-  displayName: "Install the server dependencies"
+  - script: |
+      npm install
+    displayName: 'Install the server dependencies'
 
-- script: |
-    npm test
-  displayName: "Run the unit tests"
+  - script: |
+      npm test
+    displayName: 'Run the unit tests'
 
-- task: CopyFiles@2
-  inputs:
-    SourceFolder:  "$(System.DefaultWorkingDirectory)"
-    Contents: |
-      **
-    TargetFolder: "$(Build.ArtifactStagingDirectory)/app"
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(System.DefaultWorkingDirectory)'
+      Contents: |
+        **
+        !node_modules/
+      TargetFolder: '$(Build.ArtifactStagingDirectory)/app'
 
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: "$(Build.ArtifactStagingDirectory)/app"
-    ArtifactName: app
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)/app'
+      ArtifactName: app
