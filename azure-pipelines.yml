@@ -23,7 +23,7 @@ steps:
       SourceFolder: '$(System.DefaultWorkingDirectory)'
       Contents: |
         **
-        !node_modules/
+        !node_modules/**
       TargetFolder: '$(Build.ArtifactStagingDirectory)/app'
 
   - task: PublishBuildArtifacts@1
