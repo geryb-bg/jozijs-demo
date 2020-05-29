@@ -1,0 +1,33 @@
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: "12.x"
+  displayName: "Install Node"
+
+- script: |
+    npm install
+  displayName: "Install the app dependencies"
+
+- script: |
+    npm test
+  displayName: "Run the unit tests"
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: "$(System.DefaultWorkingDirectory)"
+    Contents: |
+      **
+    TargetFolder: "$(Build.ArtifactStagingDirectory)/app"
+  displayName: "Copy fles to build directory"
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: "$(Build.ArtifactStagingDirectory)/app"
+    ArtifactName: app
+  displayName: "Publish build artifacts"
