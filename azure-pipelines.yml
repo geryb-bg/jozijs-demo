@@ -18,6 +18,10 @@ steps:
       npm test
     displayName: 'Run the unit tests'
 
+  - script: |
+      npm prune --prod
+    displayName: 'Delete dev dependencies'
+
   - task: CopyFiles@2
     inputs:
       SourceFolder: '$(System.DefaultWorkingDirectory)'
